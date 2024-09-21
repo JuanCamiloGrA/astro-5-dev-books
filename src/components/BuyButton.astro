@@ -1,0 +1,22 @@
+---
+const COLOMBIA = "CO";
+const USA = "US";
+
+const country = Astro.request.headers.get("X-Vercel-IP-Country") ?? USA;
+
+const storeCountry = country === COLOMBIA ? "colombia" : "usa";
+const countryName = country === COLOMBIA ? "Buscalibre Colombia" : "Amazon Estados Unidos";
+
+const { buy } = Astro.props;
+const url = buy[storeCountry];
+---
+
+<a
+    href={url}
+    title="Comprar libro"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-3 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:from-purple-600 hover:to-indigo-600"
+>
+    Comprar en {countryName}
+</a>
